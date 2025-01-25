@@ -7,7 +7,7 @@
  * @version 1
  ***********************************************************************/
 Class RAM {
-    __New(port,WebServerPass){
+    __New(port, WebServerPass){
         if !IsInteger(port)
             Throw TypeError("Expected a Int but recived a " Type(port))
         if port < 0 || port > 65535
@@ -16,6 +16,7 @@ Class RAM {
         this.WebServerPass := WebServerPass
         if !RAM.WebServer.Ramwebservercheck(this.port)
             Throw TypeError("No Service running on Port " this.port)
+        return 1
     }
     LaunchAccount(Account,Jobid) {
         ;Launches a acc 
@@ -85,7 +86,7 @@ Class RAM {
         Obj := JSON.parse(response)
         for accountindex in Obj {
             if (accountindex["Username"] = Account) 
-                return accountindex["Fields"]["SavedJobId"] ? accountindex["Fields"]["SavedJobId"] : 0
+                return (accountindex.Has("Fields") && accountindex["Fields"].Has("SavedJobId")) ? accountindex["Fields"]["SavedJobId"] : 0
         }
         return 0
     }
@@ -98,8 +99,8 @@ Class RAM {
             }
         }
         static Ramwebservercheck(port){
-            code := 'netstat -ano | find "' port '" '
-            exec := ComObject("WScript.shell").exec(code)
+            code := 'netstat -ano | find "' port '"'
+            exec := ComObject("WScript.shell").exec('"' A_comspec '" /c ' code '')
             services := exec.StdOut.ReadAll()
             exec.StdIn.Close()
             return InStr(services, port) ? port : 0
