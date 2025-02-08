@@ -94,7 +94,7 @@ Class RAM {
         static PortFind(){
             Loop {
                 RandomPort := Random(49152,65535)
-                if !RAM.WebServer.Ramwebservercheck(RandomPort)
+                if RAM.WebServer.Ramwebservercheck(RandomPort)
                     return RandomPort
             }
         }
