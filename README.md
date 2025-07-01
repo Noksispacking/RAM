@@ -3,9 +3,10 @@ RAM Class for automating Roblox Account Manager
 Requirements:
 AutoHotkey v2
 Roblox Account Manager
+
 Roblox Account Manager Settings:
 Enable WebServer port:<port of your choice> 
-Enable Every Request Requires PassWord
+Enable Every Request Requires Password
 Enable Allow GetAccounts Method
 Enable LaunchAccount Method
 WebServerPass:<pass of your choice> Requires 6+ letters cannot contain symbols, letters and numbers only.
